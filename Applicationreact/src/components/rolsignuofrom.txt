@@ -1,4 +1,3 @@
-
 //import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../context/AuthProvider'
@@ -16,13 +15,13 @@ const SignUpForm = () =>{
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
 
-
     useEffect(() =>{
       userRef.current.focus();
   },[])
 
   useEffect(() =>{
       setErrMsg('');
+      console.log(setAuth)
   },[user,password] )
 
     const handleSubmit = async(e)=> {
@@ -44,6 +43,27 @@ const SignUpForm = () =>{
           const Access_token = response?.data?.Access_token;
           const Access_type = response?.data?.Access_type;
           setAuth({ user,password,Access_type,Access_token});
+          console.log(Access_type)
+          let link;
+          switch(Access_type) {
+            case 'Admin':
+              console.log("Entro a admi")
+                link = 'https://flaskapimentor.azurewebsites.net/conversations_by_month_company/1';
+                localStorage.setItem('link', link);
+                break;
+            case 'Guest': // Asume otro tipo de acceso como 'user'
+                console.log("Entro a user")
+                link = 'https://flaskapimentor.azurewebsites.net/total_users_for_company/1';
+                localStorage.setItem('link', link);
+                break;
+            // Añade más casos según sea necesario
+            default:
+              console.log("Entro a nada")
+                link = ''; // O alguna URL por defecto
+                localStorage.setItem('link', link);
+        }
+          
+          console.log(setAuth)
           setUser('');
           setPassword('');
           navigate('/hi');

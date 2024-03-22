@@ -1,0 +1,9 @@
+// import React, { useContext } from 'react';
+// import AuthContext from './path/to/AuthProvider';
+// import Graph2 from './path/to/Graph2';
+
+// const RolContext = () => {
+//     const { queryLink } = useContext(AuthContext);
+
+//     return <Graph2 url={queryLink} />;
+// }
